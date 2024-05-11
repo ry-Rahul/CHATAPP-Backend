@@ -1,7 +1,12 @@
 import express from "express";
 import userRouter from "./routes/user.js";
-import connectDb from "./utils/features.js";
+import chatRouter from "./routes/chat.js";
+import { connectDb } from "./utils/features.js";
 import dotenv from "dotenv";
+import { errorMiddleware, notFound } from "./middlewares/error.js";
+import cookieParser from "cookie-parser";
+import cors from "cors";
+import chats from "./data/data.js";
 
 dotenv.config({ path: "./.env" });
 
@@ -13,14 +18,38 @@ connectDb(mongoUri);
 
 // middleware
 app.use(express.json());
-app.use(express.urlencoded( {extended: true}))
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 
-app.use("/user", userRouter);
+
+// routes__________________________________________________________
+app.use("/api/user", userRouter);
+app.use("/chat", chatRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.get("/api/chats", (req, res) => {
+  res.send(chats);
 });
+
+app.get("/api/chats/:id", (req, res) => {
+  const chat = chats.find((chat) => chat._id === req.params.id);
+  res.send(chat);
+});
+
+
+app.use(notFound);
+app.use(errorMiddleware);
+   
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`.bgWhite.black);
+});
+  

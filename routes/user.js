@@ -1,9 +1,16 @@
 import express from "express";
-import { login, newUser } from "../controllers/user.js";
+import { loginUser, newUser ,logout, searchUser,getAllUsers} from "../controllers/user.js";
+import { isAuthenticated } from "../middlewares/auth.js";
 
 const router = express.Router();
 
 router.post("/new", newUser);
-router.post("/login", login);
+router.post("/login", loginUser);
+
+router.use(isAuthenticated);
+
+router.get("/users",getAllUsers);
+router.get("/logout",logout);
+router.get("/search", searchUser);
 
 export default router;

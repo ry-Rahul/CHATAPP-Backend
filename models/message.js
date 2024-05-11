@@ -2,18 +2,16 @@ import mongoose from "mongoose";
 
 const messageSchema = mongoose.Schema(
   {
+    content: {
+      type: String,
+    },
     sender: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
     },
-    recipient: {
+    chat: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    content: {
-      type: String,
+      ref: "Chat",
       required: true,
     },
   },

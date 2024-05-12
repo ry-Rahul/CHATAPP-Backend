@@ -37,8 +37,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: true,
-    credentials: true,
+    origin: "https://chatapp-frontend-opal.vercel.app/",
   })
 );
 

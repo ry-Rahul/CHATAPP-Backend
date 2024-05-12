@@ -3,7 +3,7 @@
 ## Installation Guide
 Open terminal in folder, connect mongodb in background.
 ```terminal
-cd server
+npm install
 npm run dev
 ```
 

@@ -1,6 +1,12 @@
 
 # Setup and run instructions.
-### run the server by  
-npm i
+## Installation Guide
+Open terminal in folder, connect mongodb in background.
+```terminal
+cd server
 npm run dev
+```
+
+## check git ignore 
+-check git ignore file and load the dependencies
 

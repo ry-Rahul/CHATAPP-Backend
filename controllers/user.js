@@ -28,19 +28,22 @@ const newUser = async (req, res, next) => {
 };
 
 // login route
+
 const loginUser = async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    if (!email || !password)
-      return next(new ErrorHandler("Please fill all the fields", 400));
-
     const user = await User.findOne({ email }).select("+password");
-
-    if (!user) return next(new ErrorHandler("User is not Available", 404));
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
     const isMatch = await compare(password, user.password);
     if (!isMatch) return next(new ErrorHandler("Invalid Password", 404));
 
+    // send the token in the cookie and send the response to the user
     sendToken(res, user, 200, "Welcome to the chat app");
   } catch (error) {
     next(error);
@@ -62,8 +65,27 @@ const logout = async (req, res) => {
 const getAllUsers = async (req, res, next) => {
   try {
     const keyword = req.query.search
-      ? { $or: [{ name: { $regex: req.query.search, $options: "i" } }] }
+      ? {
+          $or: [
+            {
+              name: {
+                $regex: req.query.search,
+                $options: "i",
+              },
+            },
+            {
+              email: {
+                $regex: req.query.search,
+                $options: "i",
+              },
+            },
+          ],
+        }
       : {};
+
+    const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+
+    res.send(users);
     // console.log("search keyword is", keyword);
   } catch (error) {
     console.log("Error in getting all users", error);
@@ -71,32 +93,41 @@ const getAllUsers = async (req, res, next) => {
   }
 };
 
-// search user route
-const searchUser = async (req, res, next) => {
+//  know the status of the user
+const knowStatus = async (req, res, next) => {
   try {
-    const { name = "" } = req.query;
+    const { AVAILABLE } = req.body;
+    const user = await User.findById(req.user);
 
-    const myChats = await Chat.find();
-    const allUsersFromMyChats = myChats.flatMap((chat) => chat.members);
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: "User not found",
+      });
+    }
 
-    // Finding all users except me and my friends
-    const allUsersExceptMeAndFriends = await User.find({
-      _id: { $nin: allUsersFromMyChats },
-      name: { $regex: name, $options: "i" },
-    });
-    const users = allUsersExceptMeAndFriends.map(({ _id, name, avatar }) => ({
-      _id,
-      name,
-      avatar: avatar.url,
-    }));
-    res.status(200).json({
+    const statusEnum = ["AVAILABLE", "BUSY"];
+ 
+    if (AVAILABLE === true ) {
+      user.onlineStatus = statusEnum[0];
+    } 
+    else {
+      user.onlineStatus = statusEnum[1];
+    }
+
+    await user.save();
+
+
+
+    return res.status(200).json({
       success: true,
-      message: users,
+      message: "Status updated",
     });
   } catch (error) {
-    console.log("Error in searching user", error);
-    next(error);
+    console.log("Error in updating status", error);
+    return next(error);
   }
 };
 
-export { loginUser, newUser, logout, searchUser, getAllUsers };
+
+export { loginUser, newUser, logout, knowStatus, getAllUsers };

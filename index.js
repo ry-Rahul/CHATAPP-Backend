@@ -1,6 +1,7 @@
 import express from "express";
 import userRouter from "./routes/user.js";
 import chatRouter from "./routes/chat.js";
+import messageRouter from "./routes/message.js";
 import { connectDb } from "./utils/features.js";
 import dotenv from "dotenv";
 import { errorMiddleware, notFound } from "./middlewares/error.js";
@@ -30,7 +31,8 @@ app.use(
 
 // routes__________________________________________________________
 app.use("/api/user", userRouter);
-app.use("/chat", chatRouter);
+app.use("/api/chat", chatRouter);
+app.use("/api/message", messageRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World");

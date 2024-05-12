@@ -21,7 +21,7 @@ const server = createServer(app);
 const io = new Server(server, { 
    pingTimeout: 60000,
     cors: {
-      origin: "https://chatapp-frontend-opal.vercel.app/", 
+      origin: "http://localhost:3000", 
     }, 
 
 });  
@@ -37,7 +37,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "https://chatapp-frontend-opal.vercel.app/",
+    origin: "http://localhost:3000",
   })
 );
 

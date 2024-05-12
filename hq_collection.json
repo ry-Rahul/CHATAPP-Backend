@@ -1,0 +1,387 @@
+{
+	"info": {
+		"_postman_id": "bf4784b0-22fb-48de-9527-fc1d46064ca7",
+		"name": "HIREQUOTIENT-ChatAPP",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28116173"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "name",
+								"value": "rahul yadav"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "rohit kumar",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "rk12@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "12345",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:9998/api/user/new",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9998",
+							"path": [
+								"api",
+								"user",
+								"new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\":\"123456\",\n    \"email\":\"ryrahul@gmail.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9998/api/user/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9998",
+							"path": [
+								"api",
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9998/api/user/users?search=rk212300@outlook.com",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9998",
+							"path": [
+								"api",
+								"user",
+								"users"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "rk212300@outlook.com"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9998/api/user/logout",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9998",
+							"path": [
+								"api",
+								"user",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9998/api/user/users?search=r",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9998",
+							"path": [
+								"api",
+								"user",
+								"users"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "r"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"BUSY\":true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9998/api/user/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9998",
+							"path": [
+								"api",
+								"user",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Chat",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9998/api/user/users?search=r",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9998",
+							"path": [
+								"api",
+								"user",
+								"users"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "r"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create chat",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\":\"663f5662b0c1455c8f3c1c0a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9998/api/chat",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9998",
+							"path": [
+								"api",
+								"chat"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fetching chats",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9998/api/user/users?search=r",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9998",
+							"path": [
+								"api",
+								"user",
+								"users"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "r"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"BUSY\":true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9998/api/user/status",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9998",
+							"path": [
+								"api",
+								"user",
+								"status"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "message",
+			"item": [
+				{
+					"name": "Sending a new message",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"chatId\":\"663f5662b0c1455c8f3c1c0a\",\n    \"content\":\"hii.  i \"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9998/api/message",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9998",
+							"path": [
+								"api",
+								"message"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all messages",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9998/api/message/663f5662b0c1455c8f3c1c0a",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9998",
+							"path": [
+								"api",
+								"message",
+								"663f5662b0c1455c8f3c1c0a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

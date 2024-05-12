@@ -10,6 +10,15 @@ npm run dev
 ## check git ignore 
 -check git ignore file and load the dependencies
 
+## .env Configuration
+```
+MONGO_URI=
+JWT_SECRET=
+PORT=9997
+OPENAI_API_KEY=
+OPENAI_MODEL=gpt-3.5-turbo
+```
+
 # Sample Output
 
 ## SignUp Page

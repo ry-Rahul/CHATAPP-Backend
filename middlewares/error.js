@@ -14,14 +14,13 @@ const errorMiddleware = (err, req, res, next) => {
     err.statusCode = 400;
   }
 
-  if (err.name === "CastError") {
-    const errorPath = err.path;
-    err.message = `Invalid Format of ${errorPath}`;
-    err.statusCode = 400;
+  if (err.code='ETIMEDOUT') {
+    err.message = `Request Timeout`;
+    err.statusCode = 408;
   }
 
   return res.status(err.statusCode).json({
-    success: false,
+    success: false, 
     message: err.message,
   });
 };

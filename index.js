@@ -16,19 +16,22 @@ dotenv.config({ path: "./.env" });
 const app = express();
 // ______socket.io_____________________________________________________
 const server = createServer(app);
+
+
 const io = new Server(server, { 
    pingTimeout: 60000,
     cors: {
-      origin: "http://localhost:3000", 
-    },
-});
+      origin: "https://chatapp-frontend-opal.vercel.app/", 
+    }, 
+
+});  
 
 const PORT = process.env.PORT || 3000;  
 const mongoUri = process.env.MONGO_URI;
  
 connectDb(mongoUri);  
 
-// middleware
+// middlewar e
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
